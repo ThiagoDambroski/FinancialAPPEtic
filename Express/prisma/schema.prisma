@@ -1,0 +1,168 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:../database.sqlite"
+}
+
+model user {
+  id       Int   @id @default(autoincrement())
+  username String @unique
+  password String
+  age      Int?
+  email    String?
+
+  configs  Config? 
+  accounts Account[]
+}
+
+model Config {
+  id                        Int @id @default(autoincrement())
+  can_modify_date          Boolean
+  can_account_go_bellow_zero Boolean
+  put_change_current_value Boolean
+
+  user      user    @relation(fields: [userId], references: [id],onDelete: Cascade)
+  userId    Int  @unique
+
+  incomeCategorys IncomeCategory[] 
+  pagamentCategory PagamentCategory[]
+}
+
+model Account {
+  id        Int   @id @default(autoincrement())
+  name      String
+  value     Float
+  openDate  DateTime?
+  moneyType String @default("$")
+
+  user      user    @relation(fields: [userId], references: [id])
+  userId    Int
+
+  incomes   Income[]
+  pagaments Pagament[]
+  planIncomes PlanIncome[]
+  planPagaments PlanPagament[]
+  savings   Savings[]
+  investments Investments[]
+}
+
+model Income {
+  id      Int   @id @default(autoincrement())
+  name    String
+  value   Float
+  date    DateTime
+  desc    String?
+
+  account   Account    @relation(fields: [accountId], references: [id])
+  accountId Int
+
+  planIncome PlanIncome? @relation(fields: [planIncomeId], references: [id])
+  planIncomeId Int?
+
+  incomeCategories IncomeCategory[] @relation("IncomeToCategory")
+}
+
+model IncomeCategory {
+  id    Int @id @default(autoincrement())
+  name  String
+  desc  String?
+
+  incomes Income[] @relation("IncomeToCategory")
+
+  config Config @relation(fields: [configId],references: [id])
+  configId Int
+}
+
+model PlanIncome {
+  id        Int  @id @default(autoincrement())
+  name      String
+  value     Float
+  date      DateTime?
+  desc      String?
+  recurrent Boolean
+  automatic Boolean
+
+  account   Account  @relation(fields: [accountId], references: [id])
+  accountId Int
+
+  incomes   Income[]
+
+  
+}
+
+model Pagament {
+  id      Int   @id @default(autoincrement())
+  name    String
+  value   Float
+  date    DateTime
+  desc    String?
+
+  account   Account    @relation(fields: [accountId], references: [id])
+  accountId Int
+
+  planPagament PlanPagament? @relation(fields: [planPagamentId], references: [id])
+  planPagamentId Int?
+
+  importance   PagamentImportance?
+  categories   PagamentCategory[] @relation("PagamentToCategory")
+}
+
+model PagamentCategory {
+  id    Int @id @default(autoincrement())
+  name  String
+  desc  String?
+
+  pagaments Pagament[] @relation("PagamentToCategory")
+
+  config Config @relation(fields: [configId],references: [id])
+  configId Int
+}
+
+model PlanPagament {
+  id        Int  @id @default(autoincrement())
+  name      String
+  value     Float
+  date      DateTime?
+  desc      String?
+  recurrent Boolean
+  automatic Boolean
+
+  account   Account  @relation(fields: [accountId], references: [id])
+  accountId Int
+
+  pagaments Pagament[]
+
+}
+
+enum PagamentImportance {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+model Savings {
+  id        Int  @id @default(autoincrement())
+  name      String
+  value     Int
+  moneyGoal Float?
+  finalDate DateTime?
+  startDate DateTime?
+  removable Boolean
+
+  account   Account    @relation(fields: [accountId], references: [id])
+  accountId Int
+}
+
+model Investments {
+  id           Int  @id @default(autoincrement())
+  name         String
+  value        Float
+  interestRate Float
+  type         String?
+  startDate    DateTime
+  account      Account @relation(fields: [accountId], references: [id])
+  accountId    Int
+}

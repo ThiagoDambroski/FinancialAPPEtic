@@ -1,0 +1,665 @@
+@import "../reset";
+
+
+.account-page {
+  padding: 3rem 2rem;
+  font-family: $primary-font;
+  color: $s-font-color;
+  background: linear-gradient(to bottom right, #f9fbfd, $secondary-color);
+  min-height: 100vh;
+
+  .account-header {
+    text-align: center;
+    margin-bottom: 2rem;
+
+    h1 {
+      font-size: 2.2rem;
+      color: $title-color;
+      font-family: $title-font;
+    }
+
+    h2 {
+      font-size: 1.4rem;
+      color: $buttonColor;
+      margin-top: 0.5rem;
+    }
+  }
+
+  .account-nav {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+
+    button {
+      background-color: $buttonColor;
+      color: $t-font-color;
+      padding: 0.7rem 1.2rem;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: $buttonColorSelect;
+      }
+
+      &.active {
+        background-color: $buttonColorSelect;
+      }
+    }
+  }
+
+  .account-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+}
+
+
+.month-view {
+  margin-top: 2rem;
+
+  .month-filter {
+    padding: 0.6rem 1rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-bottom: 1rem;
+  }
+
+  .sort-buttons {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+
+    button {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      background-color: $buttonColor;
+      color: $t-font-color;
+      cursor: pointer;
+
+      &:disabled {
+        background-color: $nav-menu-color;
+        cursor: default;
+      }
+
+      &:hover:not(:disabled) {
+        background-color: $buttonColorSelect;
+      }
+    }
+  }
+
+  .operation-item {
+    padding: 1rem;
+    border-radius: 10px;
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+
+    &.income {
+      background-color: #d4edda;
+      border-left: 5px solid green;
+    }
+
+    &.pagament {
+      background-color: #f8d7da;
+      border-left: 5px solid red;
+    }
+  }
+
+  .pagination-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+
+    button {
+      padding: 0.5rem 1rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      background-color: $buttonColor;
+      color: white;
+      cursor: pointer;
+
+      &:disabled {
+        background-color: $nav-menu-color;
+        cursor: default;
+      }
+
+      &:hover:not(:disabled) {
+        background-color: $buttonColorSelect;
+      }
+    }
+  }
+}
+
+.pagament-view {
+  margin-top: 2rem;
+
+  .month-filter, .filter-select {
+    padding: 0.6rem 1rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-bottom: 1rem;
+  }
+
+  .filter-input {
+    padding: 0.5rem;
+    margin: 0.5rem 0.5rem 1rem 0;
+    border-radius: 4px;
+    border: 1px solid #bbb;
+    min-width: 160px;
+  }
+
+  .toggle-form-button {
+    background-color: $buttonColor;
+    color: $t-font-color;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 1rem;
+
+    &:hover {
+      background-color: $buttonColorSelect;
+    }
+  }
+
+  .pagament-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 1rem;
+
+    input {
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    button[type="submit"] {
+      background-color: $buttonColor;
+      color: $t-font-color;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $buttonColorSelect;
+      }
+    }
+  }
+
+  .sort-buttons {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+
+    button {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      background-color: $buttonColor;
+      color: $t-font-color;
+      cursor: pointer;
+
+      &:disabled {
+        background-color: $nav-menu-color;
+        cursor: default;
+      }
+
+      &:hover:not(:disabled) {
+        background-color: $buttonColorSelect;
+      }
+    }
+  }
+
+  .operation-item {
+    padding: 1rem;
+    border-radius: 10px;
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+
+    &.pagament {
+      background-color: #f8d7da;
+      border-left: 5px solid red;
+    }
+  }
+
+  .pagination-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+
+    button {
+      padding: 0.5rem 1rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      background-color: $buttonColor;
+      color: white;
+      cursor: pointer;
+
+      &:disabled {
+        background-color: $nav-menu-color;
+        cursor: default;
+      }
+
+      &:hover:not(:disabled) {
+        background-color: $buttonColorSelect;
+      }
+    }
+  }
+}
+
+.plan-pagament-view {
+  margin-top: 2rem;
+
+  .toggle-form-button {
+    margin-bottom: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: $buttonColor;
+    color: $t-font-color;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $buttonColorSelect;
+    }
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+
+    input[type="text"],
+    input[type="number"],
+    input[type="date"] {
+      padding: 0.6rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    label {
+      font-size: 0.9rem;
+    }
+
+    button[type="submit"] {
+      background-color: $buttonColor;
+      color: $t-font-color;
+      padding: 0.6rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+
+      &:hover {
+        background-color: $buttonColorSelect;
+      }
+    }
+  }
+
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+
+    input {
+      padding: 0.5rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      flex: 1;
+    }
+
+    select {
+      padding: 0.5rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+  }
+
+  .plan-list {
+    .plan-item {
+      background-color: #f0f8ff;
+      border-left: 5px solid #007bff;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+
+      p {
+        margin: 0 0 0.5rem;
+      }
+
+      button {
+        background-color: $buttonColor;
+        color: $t-font-color;
+        border: none;
+        border-radius: 6px;
+        padding: 0.5rem 1rem;
+        font-weight: bold;
+        cursor: pointer;
+
+        &:hover {
+          background-color: $buttonColorSelect;
+        }
+      }
+    }
+  }
+
+  .pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+
+    button {
+      padding: 0.5rem 1rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      background-color: $buttonColor;
+      color: white;
+      cursor: pointer;
+
+      &:disabled {
+        background-color: #ccc;
+        cursor: default;
+      }
+
+      &:hover:not(:disabled) {
+        background-color: $buttonColorSelect;
+      }
+    }
+
+    span {
+      font-weight: 500;
+      color: $s-font-color;
+    }
+  }
+}
+
+
+.income-view {
+  margin-top: 2rem;
+
+  .toggle-form-button {
+    margin-bottom: 1rem;
+    padding: 0.6rem 1rem;
+    font-weight: bold;
+    background-color: $buttonColor;
+    color: $t-font-color;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $buttonColorSelect;
+    }
+  }
+
+  .income-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+
+    input {
+      padding: 0.6rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button {
+      padding: 0.6rem;
+      font-weight: bold;
+      background-color: $buttonColor;
+      color: $t-font-color;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $buttonColorSelect;
+      }
+    }
+  }
+
+  .filters {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+
+    select {
+      padding: 0.5rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+  }
+
+  .sort-buttons {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+
+    button {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 6px;
+      background-color: $buttonColor;
+      color: $t-font-color;
+      font-weight: bold;
+      cursor: pointer;
+
+      &:disabled {
+        background-color: $nav-menu-color;
+        cursor: default;
+      }
+
+      &:hover:not(:disabled) {
+        background-color: $buttonColorSelect;
+      }
+    }
+  }
+
+  .income-list {
+    list-style: none;
+    padding: 0;
+
+    .operation-item.income {
+      background-color: #d4edda;
+      border-left: 5px solid green;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      font-weight: 500;
+    }
+  }
+
+  .pagination-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+
+    button {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 6px;
+      background-color: $buttonColor;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+
+      &:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+      }
+
+      &:hover:not(:disabled) {
+        background-color: $buttonColorSelect;
+      }
+    }
+  }
+}
+.plan-income-view {
+  margin-top: 2rem;
+
+  button {
+    background-color: $buttonColor;
+    color: $t-font-color;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    margin-bottom: 1rem;
+
+    &:hover {
+      background-color: $buttonColorSelect;
+    }
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+
+    input[type="text"],
+    input[type="number"],
+    input[type="date"] {
+      padding: 0.6rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    label {
+      font-size: 0.9rem;
+    }
+
+    button[type="submit"] {
+      background-color: $buttonColor;
+      color: $t-font-color;
+      padding: 0.6rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+
+      &:hover {
+        background-color: $buttonColorSelect;
+      }
+    }
+  }
+
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+
+    input {
+      padding: 0.5rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      flex: 1;
+    }
+
+    select {
+      padding: 0.5rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+  }
+
+  .plan-item {
+    background-color: #eafdf0;
+    border-left: 5px solid green;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+
+    p {
+      margin: 0 0 0.5rem;
+    }
+
+    button {
+      background-color: $buttonColor;
+      color: $t-font-color;
+      border: none;
+      border-radius: 6px;
+      padding: 0.5rem 1rem;
+      font-weight: bold;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $buttonColorSelect;
+      }
+    }
+  }
+
+  .pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+
+    button {
+      padding: 0.5rem 1rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      background-color: $buttonColor;
+      color: white;
+      cursor: pointer;
+
+      &:disabled {
+        background-color: $nav-menu-color;
+        cursor: default;
+      }
+
+      &:hover:not(:disabled) {
+        background-color: $buttonColorSelect;
+      }
+    }
+
+    span {
+      font-weight: bold;
+      color: $s-font-color;
+    }
+  }
+}
+
+
+
+.filter-input {
+    padding: 0.5rem;
+    margin: 0.5rem 0.5rem 1rem 0;
+    border-radius: 4px;
+    border: 1px solid #bbb;
+    min-width: 160px;
+    
+  }

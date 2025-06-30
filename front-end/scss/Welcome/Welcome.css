@@ -1,0 +1,272 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Doto:wght@100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+body.light-box-block {
+  overflow: hidden;
+}
+
+p {
+  line-height: 1.3;
+}
+@media screen and (min-width: 480px) {
+  p {
+    line-height: 1.5;
+  }
+}
+
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.lightbox-overlay .lightbox-form {
+  background: white;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  max-width: 500px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.lightbox-overlay .lightbox-form h2 {
+  color: #567C8D;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+.lightbox-overlay .lightbox-form input {
+  padding: 0.8rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+.lightbox-overlay .lightbox-form input:focus {
+  border-color: #567C8D;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(86, 124, 141, 0.2);
+}
+.lightbox-overlay .lightbox-form button[type=submit] {
+  background-color: #2F4156;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  padding: 0.9rem;
+  cursor: pointer;
+}
+.lightbox-overlay .lightbox-form button[type=submit]:hover {
+  background-color: #1d2835;
+}
+
+.back-button {
+  position: absolute;
+  top: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin: 1rem 0;
+  color: #333;
+  width: -moz-fit-content;
+  width: fit-content;
+  transition: color 0.3s ease;
+}
+.back-button:hover {
+  color: black;
+  text-decoration: underline;
+}
+
+.welcome-page {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+  padding: 4rem 2rem;
+  font-family: "Raleway", sans-serif;
+  color: #333333;
+  background: linear-gradient(to bottom right, #f5f9fc, #B0C4DE);
+  min-height: 100vh;
+}
+.welcome-page .left-column {
+  max-width: 600px;
+}
+.welcome-page .right-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.welcome-page h1 {
+  font-family: "Montserrat";
+  font-size: 2.5rem;
+  color: #567C8D;
+  margin-bottom: 0.5rem;
+}
+.welcome-page h2, .welcome-page h3 {
+  font-size: 1.5rem;
+  margin: 1rem 0;
+  color: #2F4156;
+}
+.welcome-page ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.welcome-page ul li {
+  list-style: none;
+  text-align: center;
+  background: white;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  font-weight: bold;
+  color: #2F4156;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  font-size: 1.1rem;
+  min-width: 120px;
+  border: 1px solid #C8D9E6;
+}
+.welcome-page .account-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-bottom: 2rem;
+  transition: all 0.3s ease;
+  border: 2px solid #C8D9E6;
+  padding: 1rem;
+  border-radius: 12px;
+  background-color: white;
+}
+.welcome-page .account-list p {
+  background: #C8D9E6;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  animation: fadeInItem 0.4s ease both;
+}
+.welcome-page .account-list p:hover {
+  transform: translateY(-3px);
+  background-color: #dae5ee;
+}
+.welcome-page .filter-section {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.welcome-page .filter-section input {
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  width: 100%;
+  max-width: 200px;
+}
+.welcome-page .filter-section input:focus {
+  outline: none;
+  border-color: #567C8D;
+  box-shadow: 0 0 0 2px rgba(86, 124, 141, 0.2);
+}
+.welcome-page .pagination-controls {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.welcome-page .pagination-controls button {
+  padding: 0.5rem 1rem;
+  background-color: #2F4156;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.welcome-page .pagination-controls button:hover {
+  background-color: #1d2835;
+}
+.welcome-page .action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+.welcome-page .action-buttons button {
+  background-color: #2F4156;
+  color: whiteSmoke;
+  padding: 0.8rem 1.2rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.welcome-page .action-buttons button:hover {
+  background-color: #1d2835;
+}
+.welcome-page .lightbox-form {
+  background: white;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  max-width: 500px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.welcome-page .lightbox-form h2 {
+  color: #567C8D;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+.welcome-page .lightbox-form input {
+  padding: 0.8rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+.welcome-page .lightbox-form input:focus {
+  border-color: #567C8D;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(86, 124, 141, 0.2);
+}
+.welcome-page .lightbox-form button[type=submit] {
+  background-color: #2F4156;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  padding: 0.9rem;
+  cursor: pointer;
+}
+.welcome-page .lightbox-form button[type=submit]:hover {
+  background-color: #1d2835;
+}
+
+@keyframes fadeInItem {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}/*# sourceMappingURL=welcome.css.map */

@@ -8,5 +8,7 @@ router.get("/getAll", AccountController.getAll);
 router.get("/getById/:accountId",AccountController.getById)
 router.get("/getAllOperations/:accountId",AccountController.getAllOperations)
 router.get("/getByUser/:userId", AccountController.getByUser);
+router.put("/put/:accountId",AccountController.update)
+router.delete("/delete/:accountId",AccountController.deleteAccount)
 
 export default router;

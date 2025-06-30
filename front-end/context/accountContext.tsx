@@ -6,9 +6,11 @@ import { useUser } from "./userContext";
 type AccountContextType = {
   accountList: Account[];
   createNewAccount: (account: AccountToPost) => Promise<void>;
+  updateAccount: (accountId: number, updatedData: AccountToPost) => Promise<void>;
+  deleteAccount: (accountId: number) => Promise<void>;
   reloadAccount: () => void;
   getOperationsByAccountId: (accountId: number) => Promise<OperationsList | null>;
-  reload:boolean;
+  reload: boolean;
 };
 
 type Account = {
@@ -21,7 +23,6 @@ type Account = {
 
 type AccountToPost = {
   name: string;
-  value: number;
   moneyType?: string;
   openDate?: Date;
 };
@@ -62,7 +63,7 @@ export function AccountProvider({ children }: { children: ReactNode }) {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const reloadAccount = () => {
-    setReload(!reload);
+    setReload((prev) => !prev);
   };
 
   useEffect(() => {
@@ -101,6 +102,37 @@ export function AccountProvider({ children }: { children: ReactNode }) {
     }
   };
 
+  const updateAccount = async (accountId: number, updatedData: AccountToPost) => {
+    const url = `${accountUrl}/put/${accountId}`;
+    const putOptions = {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updatedData),
+    };
+
+    try {
+      await apiRequest(url, putOptions);
+      setErrorMessage(null);
+      reloadAccount();
+    } catch (error: any) {
+      setErrorMessage(error.message);
+    }
+  };
+
+  const deleteAccount = async (accountId: number) => {
+    const url = `${accountUrl}/delete/${accountId}`;
+    const deleteOptions = { method: "DELETE" };
+
+    try {
+      await apiRequest(url, deleteOptions);
+      setErrorMessage(null)
+      reloadUser()
+      reloadAccount();
+    } catch (error: any) {
+      setErrorMessage(error.message);
+    }
+  };
+
   const getOperationsByAccountId = async (accountId: number): Promise<OperationsList | null> => {
     const url = `${accountUrl}/getAllOperations/${accountId}`;
     const getOptions = { method: "GET" };
@@ -116,7 +148,15 @@ export function AccountProvider({ children }: { children: ReactNode }) {
 
   return (
     <AccountContext.Provider
-      value={{ accountList, createNewAccount, reloadAccount, getOperationsByAccountId,reload }}
+      value={{
+        accountList,
+        createNewAccount,
+        updateAccount,
+        deleteAccount,
+        reloadAccount,
+        getOperationsByAccountId,
+        reload,
+      }}
     >
       {children}
     </AccountContext.Provider>

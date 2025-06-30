@@ -88,6 +88,57 @@ export const getAllOperations = async (req:Request,res:Response):Promise<void> =
 }
 
 
+export const update = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const accountId = parseInt(req.params.accountId);
+    const account = await prisma.account.findUnique({ where: { id: accountId } });
+
+    if (!account) {
+      res.status(404).json({ message: "Account not found" });
+      return;
+    }
+
+    const updated = await prisma.account.update({
+      where: { id: accountId },
+      data: req.body,
+    });
+
+    res.status(200).json(updated);
+  } catch (error: any) {
+    res.status(500).json({ message: `Error ${error.message}` });
+  }
+};
+
+export const deleteAccount = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const accountId = parseInt(req.params.accountId);
+
+    const account = await prisma.account.findUnique({ where: { id: accountId } });
+    if (!account) {
+      res.status(404).json({ message: "Account not found" });
+      return;
+    }
+
+    // Delete all related data
+    await prisma.income.deleteMany({ where: { accountId } });
+    await prisma.pagament.deleteMany({ where: { accountId } });
+    await prisma.planIncome.deleteMany({ where: { accountId } });
+    await prisma.planPagament.deleteMany({ where: { accountId } });
+    await prisma.savings.deleteMany({ where: { accountId } });
+    await prisma.investments.deleteMany({ where: { accountId } });
+
+    // Delete the account itself
+    await prisma.account.delete({ where: { id: accountId } });
+
+    res.status(200).json({ message: "Account and all related data deleted." });
+  } catch (error: any) {
+    res.status(500).json({ message: `Error ${error.message}` });
+  }
+};
+
+
+
+
 export default {
- post,getAll,getByUser,getAllOperations,getById
+ post,getAll,getByUser,getAllOperations,getById,update,deleteAccount
 };

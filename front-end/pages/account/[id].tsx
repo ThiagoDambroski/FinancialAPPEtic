@@ -6,6 +6,7 @@ import MonthView from "../../components/MonthView";
 import PagamentView from "../../components/PagamentView";
 import IncomeView from "../../components/IncomeView";
 import { useAccount } from "../../context/accountContext";
+import ConfigView from "../../components/ConfigView";
 
 type Account = {
   id: number;
@@ -80,7 +81,7 @@ export default function AccountPage() {
 
   return (
     <main className="account-page">
-      {/* 🔙 Back arrow */}
+
       <div className="back-button" onClick={() => router.back()}>
         ← Back
       </div>
@@ -92,7 +93,7 @@ export default function AccountPage() {
         </h2>
       </div>
 
-      {/* 👇 View selector */}
+
       <div className="account-nav">
         <button
           className={selectOption === 0 ? "active" : ""}
@@ -112,6 +113,12 @@ export default function AccountPage() {
         >
           Income
         </button>
+        <button
+          className={selectOption === 3 ? "active" : ""}
+          onClick={() => setSelectOption(3)}
+        >
+          Config
+        </button>
       </div>
 
       {/* 👇 Content based on selection */}
@@ -119,6 +126,7 @@ export default function AccountPage() {
         {selectOption === 0 && <MonthView account={account} />}
         {selectOption === 1 && <PagamentView account={account} />}
         {selectOption === 2 && <IncomeView account={account} />}
+        {selectOption === 3 && <ConfigView account={account} />}
       </div>
     </main>
   );

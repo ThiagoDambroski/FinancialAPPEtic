@@ -29,6 +29,14 @@ export default function Welcome() {
 
   const router = useRouter();
 
+  const handleChangeInValue = (e) => {
+    let value = parseFloat(e.target.value)
+    if(value < 0){
+      value = 0
+    }
+    setValue(value)
+  }
+
   useEffect(() => {
     if (!isLoggedIn) {
       router.replace("/");
@@ -51,7 +59,7 @@ export default function Welcome() {
       name: accountName,
       value: value,
       openDate: new Date(),
-      moneyType: moneyType,
+      moneyType: moneyType.trim() === "" ? "$" : moneyType,
     };
     createNewAccount(accountNew);
 
@@ -77,7 +85,8 @@ export default function Welcome() {
 
   return (
     <div className="welcome-page">
-      {/* LEFT COLUMN: Accounts */}
+
+      {/*Accounts */}
       <div className="left-column">
         <h3>Accounts</h3>
 
@@ -97,6 +106,7 @@ export default function Welcome() {
         </div>
 
         <div className="account-list">
+          {paginatedAccounts.length === 0 && <h4>Accounts not register</h4>}
           {paginatedAccounts?.map((account) => (
             <p key={account.id} onClick={() => goToAccountHub(account)}>
               {account.name} - {account.value} {account.moneyType}
@@ -122,10 +132,13 @@ export default function Welcome() {
         )}
       </div>
 
-      {/* RIGHT COLUMN: Info */}
+      {/*Info */}
       <div className="right-column">
         <h1>Welcome {userLogged.username}!</h1>
+        {userLogged.age && <p>Age: {userLogged.age}</p>}
+        {userLogged.email && <p>Email: {userLogged.email}</p>}
         <h2>Total Money:</h2>
+        {moneyAmount.length === 0 && <p>Account not register</p>}
         <ul>
           {moneyAmount?.map((item, index) => (
             <li key={index}>
@@ -141,7 +154,7 @@ export default function Welcome() {
         </div>
       </div>
 
-      {/* Lightbox Overlay */}
+      {/* Lightbox */}
       {lightbox && (
         <div
           className="lightbox-overlay"
@@ -163,7 +176,7 @@ export default function Welcome() {
               type="number"
               placeholder="Initial Value"
               value={value}
-              onChange={(e) => setValue(parseFloat(e.target.value))}
+              onChange={(e) => handleChangeInValue(e)}
             />
             <input
               type="text"

@@ -58,6 +58,7 @@ export default function IncomeView({ account }) {
     setValue(0);
     setDate(new Date());
     setDesc('');
+    setShowAddIncome(false)
   };
 
   const openEditForm = (inc) => {
@@ -203,7 +204,7 @@ export default function IncomeView({ account }) {
                 const plan = planIncomeList.find(p => p.id === inc.planIncomeId);
                 return plan ? ` | Plan: ${plan.name}` : '';
               })()}
-               | DESC: {inc.desc && inc.desc}
+                {inc.desc && `| DESC: ${inc.desc}`}
             </li>
           ))}
         </ul>
